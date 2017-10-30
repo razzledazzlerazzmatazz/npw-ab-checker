@@ -1,0 +1,31 @@
+{
+  "name": "npw-airbnb-checker",
+  "version": "1.0.0",
+  "description": "Test project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/razzledazzlerazzmatazz/npw-airbnb-checker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/razzledazzlerazzmatazz/npw-airbnb-checker/issues"
+  },
+  "homepage": "https://github.com/razzledazzlerazzmatazz/npw-airbnb-checker#readme",
+  "bin": {
+    "npw-check": "./index.js"
+  },
+  "dependencies": {
+    "chalk": "^2.3.0",
+    "commander": "^2.11.0",
+    "fetch": "^1.1.0",
+    "json-string": "0.0.1",
+    "parse-json": "^3.0.0",
+    "prettyprint": "^1.1.1",
+    "progress": "^2.0.0"
+  }
+}
