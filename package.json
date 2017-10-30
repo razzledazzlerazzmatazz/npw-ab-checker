@@ -23,7 +23,9 @@
     "chalk": "^2.3.0",
     "commander": "^2.11.0",
     "fetch": "^1.1.0",
+    "gmail-send": "^1.2.11",
     "json-string": "0.0.1",
+    "nodemailer": "^4.3.1",
     "parse-json": "^3.0.0",
     "prettyprint": "^1.1.1",
     "progress": "^2.0.0"

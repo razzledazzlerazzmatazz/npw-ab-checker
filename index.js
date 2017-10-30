@@ -6,12 +6,16 @@ var FetchStream = require('fetch').FetchStream;
 
 const parseJson = require('parse-json');
 const prettyprint = require('prettyprint').default;
+const nodemailer = require('nodemailer');
 
 var scramble = ['b', 'n', 'b', 'r', 'i', 'a' ];
 var masterURLPart = scramble.reverse().join('');
 
 program
         .version('1.0.0')
+        .option('-u, --user [username]', 'SMTP username for Gmail')
+        .option('-p, --password [password]', 'SMTP password for Gmail')
+        .option('-t, --to [email_address]', 'Email address to send the report to')
         .description('This program loads all ' + masterURLPart + ' properties in New Providence Wharf')
         .parse(process.argv);
 
@@ -81,6 +85,7 @@ fetch.on('end', function() {
         try {
                 jsonResponse = parseJson(response);
         } catch (err) {
+                console.log(chalk.bold.red(err));
                 throw err;
         }
 
@@ -90,6 +95,9 @@ fetch.on('end', function() {
                 listings.map(function (val) {
                     console.log('https://www.'+masterURLPart+'.co.uk/rooms/' + val.listing.id + "\t" + val.listing.name);
                 });
+
+                // send email
+                sendReportEmail(listings);
         } catch (exc) {
                 console.log(chalk.bold.red('Exception: '+ exc +'\n'));
         }
@@ -98,3 +106,31 @@ fetch.on('end', function() {
 fetch.on('error', function(error) {
         console.log(chalk.bold.red('Error: '+ error +'\n'));
 });
+
+var sendReportEmail = function(listings) {
+        var send = require('gmail-send')({
+                user: program.user,
+                pass: program.password,
+                to:   program.to,
+                from: program.user,
+                subject: 'NPW Checker',
+                text:    'gmail-send example 1',         // Plain text
+                html:    '<b>html text</b>'            // HTML
+        });
+
+        var text = listings.map(function (val) {
+            return 'https://www.'+masterURLPart+'.co.uk/rooms/' + val.listing.id + "\t" + val.listing.name;
+        }).join('\n');
+
+        var html = listings.map(function (val) {
+            return '<p>https://www.'+masterURLPart+'.co.uk/rooms/' + val.listing.id + " - " + val.listing.name + '</p>';
+        }).join('\n');
+
+        send({ text: text, html: html }, function (err, res) { 
+            if(err === null) {
+                console.log('\nEmail sent\n');
+            } else {
+                 console.log(chalk.bold.red('\nError sending email: '+ err +'\n'));
+            }
+        });
+}
