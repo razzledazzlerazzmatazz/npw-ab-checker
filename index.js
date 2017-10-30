@@ -7,21 +7,21 @@ var FetchStream = require('fetch').FetchStream;
 const parseJson = require('parse-json');
 const prettyprint = require('prettyprint').default;
 
+var scramble = ['b', 'n', 'b', 'r', 'i', 'a' ];
+var masterURLPart = scramble.reverse().join('');
+
 program
         .version('1.0.0')
-        .description('This program loads all AirBnB properties in New Providence Wharf')
+        .description('This program loads all ' + masterURLPart + ' properties in New Providence Wharf')
         .parse(process.argv);
 
-console.log(chalk.bold.green('Welcome to the NPM AirBnB checker!\n'));
+console.log(chalk.bold.green('Welcome to the NPM ' + masterURLPart + ' checker!\n'));
 
 var fetchOptions = {
         headers: {
                 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36' 
         }
 }
-
-var scramble = ['b', 'n', 'b', 'r', 'i', 'a' ];
-var masterURLPart = scramble.reverse().join('');
 
 var masterURL = 'https://www.'+masterURLPart+'.co.uk/api/v2/explore_tabs';
 var masterURLParams = {
