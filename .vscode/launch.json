@@ -10,17 +10,8 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}/index.js",
             "stopOnEntry": true,
-            "args": [ "--u claudiu.iorgulescu@gmail.com", "--p yefxxzudgqixmtyg", "--t claudiu.iorgulescu@gmail.com" ],
-            "console": "integratedTerminal",
-            "runtimeExecutable": null,
-            "runtimeArgs": [
-                "--nolazy"
-            ],
-            "env": {
-                "NODE_ENV": "development"
-            },
-            "externalConsole": false,
-            "sourceMaps": false,
-            "outDir": null}
+            "args": [ "-u", "claudiu.iorgulescu@gmail.com", "-p", "yefxxzudgqixmtyg", "-t", "claudiu.iorgulescu@gmail.com" ],
+            "console": "externalTerminal",
+        }
     ]
 }
