@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/index.js",
             "stopOnEntry": true,
             "args": [ "-u", "claudiu.iorgulescu@gmail.com", "-p", "yefxxzudgqixmtyg", "-t", "claudiu.iorgulescu@gmail.com" ],
-            "console": "externalTerminal",
+            "console": "internalConsole"
         }
     ]
 }
