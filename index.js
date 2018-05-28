@@ -90,7 +90,16 @@ fetch.on('end', function() {
         }
 
         try {
-                var listings = jsonResponse.explore_tabs[0].sections[0].listings;
+                var accumulator = (acc, cur) => {
+                    if(cur.hasOwnProperty('listings')) {
+                        for(x in cur.listings) {
+                            acc.push(cur.listings[x]);
+                        }
+                    }
+                    return acc;
+                }
+                var listings = new Array();
+                jsonResponse.explore_tabs[0].sections.reduce(accumulator, listings)
                 console.log(chalk.bold.green('Found ' + listings.length + ' listings:\n\n'));
                 listings.map(function (val) {
                     console.log('https://www.'+masterURLPart+'.co.uk/rooms/' + val.listing.id + "\t" + val.listing.name);
